@@ -1,0 +1,68 @@
+services:
+  gateway:
+    build: ./api_gateway
+    ports:
+      - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./api_gateway:/app
+    depends_on:
+      - auth
+      - master
+      - vendors
+      - marketing
+
+  auth:
+    build: ./services/auth
+    ports:
+      - "${AUTH_PORT}:${AUTH_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./services/master:/app
+    depends_on:
+      - dbConnect
+
+  master:
+    build: ./services/master
+    ports:
+      - "${MASTER_PORT}:${MASTER_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./services/master:/app
+    depends_on:
+      - dbConnect
+
+  vendors:
+    build: ./services/vendors
+    ports:
+      - "${MARKETING_PORT}:${MARKETING_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./services/vendors:/app
+    depends_on:
+      - dbConnect
+
+  marketing:
+    build: ./services/marketing
+    ports:
+      - "${MARKETING_PORT}:${MARKETING_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./services/marketing:/app
+    depends_on:
+      - dbConnect
+
+  dbConnect:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "5435:5432"
