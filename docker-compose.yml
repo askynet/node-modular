@@ -1,6 +1,8 @@
 services:
   gateway:
-    build: ./api_gateway
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile.prod
     ports:
       - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
     env_file:
@@ -14,7 +16,9 @@ services:
       - marketing
 
   auth:
-    build: ./services/auth
+    build:
+      context: ./services/auth
+      dockerfile: Dockerfile.prod
     ports:
       - "${AUTH_PORT}:${AUTH_PORT}"
     env_file:
@@ -25,7 +29,9 @@ services:
       - dbConnect
 
   master:
-    build: ./services/master
+    build:
+      context: ./services/master
+      dockerfile: Dockerfile.prod
     ports:
       - "${MASTER_PORT}:${MASTER_PORT}"
     env_file:
@@ -36,7 +42,9 @@ services:
       - dbConnect
 
   vendors:
-    build: ./services/vendors
+    build:
+      context: ./services/vendors
+      dockerfile: Dockerfile.prod
     ports:
       - "${MARKETING_PORT}:${MARKETING_PORT}"
     env_file:
@@ -47,7 +55,9 @@ services:
       - dbConnect
 
   marketing:
-    build: ./services/marketing
+    build: 
+      context: ./services/vendors
+      dockerfile: Dockerfile.prod
     ports:
       - "${MARKETING_PORT}:${MARKETING_PORT}"
     env_file:
@@ -65,4 +75,4 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
     ports:
-      - "5435:5432"
+      - "${DB_PORT}:${DB_PORT}"
