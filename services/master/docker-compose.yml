@@ -1,0 +1,23 @@
+services:
+  master:
+    build: ./services/master
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - ./services/master/.env
+    depends_on:
+      - master-db
+
+  master-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - master-db-data:/var/lib/postgresql/data
+
+volumes:
+  master-db-data:

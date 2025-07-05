@@ -1,0 +1,30 @@
+# Node.js
+*node_modules/
+dist/
+build/
+
+# Environment variables
+.env
+**/.env
+**/.env.dev
+**/.env.prod
+*.env.local
+*.env.*
+
+# Logs
+*logs/
+*.log
+*npm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Dependency locks (optional)
+package-lock.json
+**/package-lock.json
+*yarn.lock

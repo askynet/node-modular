@@ -1,0 +1,23 @@
+services:
+  vendors:
+    build: ./services/vendors
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - ./services/vendors/.env
+    depends_on:
+      - vendors-db
+
+  vendors-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - vendors-db-data:/var/lib/postgresql/data
+
+volumes:
+  vendors-db-data:

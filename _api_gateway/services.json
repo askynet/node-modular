@@ -1,0 +1,6 @@
+{
+  "auth": "http://localhost:9001",
+  "master": "http://localhost:9002",
+  "vendors": "http://localhost:9003",
+  "marketing": "http://localhost:9004"
+}
