@@ -12,7 +12,7 @@ Object.keys(services).forEach(serviceName => {
             target,
             changeOrigin: true,
             pathRewrite: {
-                [`^/api/${serviceName}`]: '', // remove /api/service prefix
+                [`^/api/${serviceName}`]: ''
             },
         })
     );
