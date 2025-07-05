@@ -82,7 +82,7 @@ module.exports = (sequelize) => {
             {
                 unique: true,
                 fields: ['email'],
-                name: 'user_email'
+                name: 'emp_email'
             }
         ]
     });

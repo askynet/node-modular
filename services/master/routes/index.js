@@ -1,7 +1,6 @@
 const express = require('express');
-const { getArea } = require('../controllers/area.controller');
 const router = express.Router();
-
-router.get('/:id', getArea);
+// Mount sub-routes
+router.use('/areas', require('./area.route'));
 
 module.exports = router;

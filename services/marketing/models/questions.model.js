@@ -50,14 +50,15 @@ module.exports = (sequelize) => {
         freezeTableName: true
     });
 
-    Questions.associations = [
-        {
-            type: 'hasOne',
-            target: 'Countries',
-            sourceKey: 'countryId',
-            foreignKey: 'countryId',
-            as: 'country'
-        }
-    ]
+    // Questions.associations = [
+    //     {
+    //         type: 'hasOne',
+    //         target: 'Countries',
+    //         sourceKey: 'countryId',
+    //         foreignKey: 'countryId',
+    //         as: 'country',
+    //         constraints: false
+    //     }
+    // ]
     return Questions;
 };

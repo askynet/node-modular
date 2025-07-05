@@ -1,12 +1,10 @@
 const { VENDORS } = require("../models");
+const { sendResponse, handleCatchError } = require("../utils/error.handler");
 
 exports.getVendor = async (req, res) => {
-    const user = await VENDORS.Vendors.findByPk(req.params.id);
-    user ? res.json({
-        code: 'SUCCESS',
-        data: user
-    }) : res.status(404).json({
-        code: 'SUCCESS',
-        error: 'Not found'
-    });
+    try {
+        return sendResponse(res, { ok: 1 })
+    } catch (error) {
+        return handleCatchError(error, req, res)
+    }
 };
